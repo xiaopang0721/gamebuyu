@@ -96,8 +96,8 @@ module gamebuyu.page {
             this._viewUI.btn_Exit.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_Rule.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_Set.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.check_Aim.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.check_Auto.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            this._viewUI.check_Aim.on(LEvent.CLICK, this, this.onCheckBox);
+            this._viewUI.check_Auto.on(LEvent.CLICK, this, this.onCheckBox);
             this._viewUI.btn_zhanji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_qifu.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._game.playMusic(Path.music + "buyu/bg.mp3");
@@ -220,15 +220,9 @@ module gamebuyu.page {
             }
         }
 
-        protected onBtnTweenEnd(e: any, target: any): void {
+        private onCheckBox(e: LEvent): void {
             let mainPlayer = this._buyuMgr.mainPlayer;
-            switch (target) {
-                case this._viewUI.btn_spread:
-                    this.showMenu(true);
-                    break;
-                case this._viewUI.btn_Exit:
-                    this._game.sceneObjectMgr.leaveStory(true);
-                    break;
+            switch (e.currentTarget) {
                 case this._viewUI.check_Aim://瞄准射击
                     if (this._viewUI.check_Aim.selected)
                         mainPlayer && (mainPlayer.fireType = BuyuPlayer.FIRE_TYPE_AIM);
@@ -241,6 +235,19 @@ module gamebuyu.page {
                     else
                         mainPlayer && (mainPlayer.fireType = BuyuPlayer.FIRE_TYPE_HAND);
                     break;
+            }
+        }
+
+        protected onBtnTweenEnd(e: any, target: any): void {
+            let mainPlayer = this._buyuMgr.mainPlayer;
+            switch (target) {
+                case this._viewUI.btn_spread:
+                    this.showMenu(true);
+                    break;
+                case this._viewUI.btn_Exit:
+                    this._game.sceneObjectMgr.leaveStory(true);
+                    break;
+
                 case this._viewUI.btn_Set:
                     this._game.uiRoot.general.open(TongyongPageDef.PAGE_TONGYONG_SETTING);
                     break;
