@@ -83,6 +83,15 @@ module gamebuyu.page {
 				Path.custom_atlas_scene + "single.atlas",
 				Path.custom_atlas_scene + "lightning.atlas",
 				Path.custom_atlas_scene + "bullet.atlas",
+
+				Path_game_buyu.ui_buyu + "sk/buyu_0.png",
+				Path_game_buyu.ui_buyu + "sk/buyu_0.sk",
+				Path_game_buyu.ui_buyu + "sk/buyu_1.png",
+				Path_game_buyu.ui_buyu + "sk/buyu_1.sk",
+				Path_game_buyu.ui_buyu + "sk/buyu_2.png",
+				Path_game_buyu.ui_buyu + "sk/buyu_2.sk",
+				Path_game_buyu.ui_buyu + "sk/buyu_3.png",
+				Path_game_buyu.ui_buyu + "sk/buyu_3.sk",
 			]
 
 			if (WebConfig.needMusicPreload) {
