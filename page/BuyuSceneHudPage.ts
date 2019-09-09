@@ -7,7 +7,7 @@ module gamebuyu.page {
         //体验场提示间隔
         static TIPS_INTERVAL: number = 3 * 60 * 1000;
 
-        private _viewUI: ui.game_ui.buyu.BuYu_SceneHUDUI;
+        private _viewUI: ui.nqp.game_ui.buyu.BuYu_SceneHUDUI;
         //主玩家
         private _mainPlayer: BuyuPlayer;
         //4个炮的对象集合

@@ -3,7 +3,7 @@
 */
 module gamebuyu.page {
     export class BuyuMainPageOld extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.buyu.BuYu_HUDUI;
+        private _viewUI: ui.nqp.game_ui.buyu.BuYu_HUDUI;
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
             this._asset = [
