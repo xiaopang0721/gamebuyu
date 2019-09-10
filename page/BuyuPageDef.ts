@@ -24,11 +24,7 @@ module gamebuyu.page {
 		static myinit(str: string) {
 			super.myinit(str);
 			BuyuClip.init();
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-				PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_HUD] = BuyuMainPage;
-			} else {
-				PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_HUD] = BuyuMainPageOld;
-			}
+			PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_HUD] = BuyuMainPage;
 			PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_MAIN] = BuyuSceneHudPage;
 			PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_GUIZE] = BuyuGuiZePage;
 			PageDef._pageClassMap[BuyuPageDef.PAGE_BUYU_GREAT] = BuyuGreatPage;

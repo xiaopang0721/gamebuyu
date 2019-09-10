@@ -19,6 +19,8 @@ module gamebuyu.page {
             this._asset = [
                 Path_game_buyu.atlas_game_ui + "buyu/guize.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
             ];
         }
 
