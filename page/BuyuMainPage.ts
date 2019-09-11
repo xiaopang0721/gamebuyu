@@ -6,6 +6,7 @@ module gamebuyu.page {
         private _viewUI: ui.nqp.game_ui.buyu.BuYu_HUDUI;
         private _difenTmep: any = [0.01, 0.1, 1];
         private _leastTmep: any = [1, 10, 100];
+        private _clipArr: any[] = [ClipUtil.HUD_FONT1, ClipUtil.HUD_FONT2, ClipUtil.HUD_FONT3];
         private _difenClipList: ClipUtil[] = [];
         private _leastClipList: ClipUtil[] = [];
 
@@ -38,14 +39,14 @@ module gamebuyu.page {
             BuyuPageDef.parseBuYuData(this._assetsLoader);
             for (let index = 0; index < 3; index++) {
                 if (!this._difenClipList[index]) {
-                    this._difenClipList[index] = new ClipUtil(ClipUtil.HUD_FONT1);
+                    this._difenClipList[index] = new ClipUtil(this._clipArr[index]);
                     this._difenClipList[index].x = this._viewUI["txt_difen" + index].x;
                     this._difenClipList[index].y = this._viewUI["txt_difen" + index].y;
                     this._viewUI["txt_difen" + index].parent && this._viewUI["txt_difen" + index].parent.addChild(this._difenClipList[index]);
                     this._viewUI["txt_difen" + index].removeSelf();
                 }
                 if (!this._leastClipList[index]) {
-                    this._leastClipList[index] = new ClipUtil(ClipUtil.HUD_FONT1);
+                    this._leastClipList[index] = new ClipUtil(this._clipArr[index]);
                     this._leastClipList[index].x = this._viewUI["txt_least" + index].x;
                     this._leastClipList[index].y = this._viewUI["txt_least" + index].y;
                     this._leastClipList[index].scale(0.8, 0.8);

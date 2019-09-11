@@ -11,11 +11,11 @@ module gamebuyu {
         public static SUB_MONEY_FONT: any;
         //捕鱼转盘字体
         public static ZHUANPAN_FONT: any;
-         //HUD数字1
+        //HUD数字1
         public static HUD_FONT1: any;
-         //HUD数字2
+        //HUD数字2
         public static HUD_FONT2: any;
-         //HUD数字3
+        //HUD数字3
         public static HUD_FONT3: any;
 
         static init(): void {
@@ -56,30 +56,30 @@ module gamebuyu {
                 clipX: 11,
                 space: 0,
             };
-            
+
             //HUD数字1
             this.HUD_FONT1 = {
-                source: PathGameTongyong.atlas_game_ui_tongyong+ "hud.atlas",
+                source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
                 url: Path_game_buyu.ui_buyu + 'hud/clip_1.png',
                 clipWidth: 22,
                 clipHeight: 25,
                 clipX: 11,
                 space: -5
             };
-            
+
             //HUD数字2
             this.HUD_FONT2 = {
-                source: PathGameTongyong.atlas_game_ui_tongyong+ "hud.atlas",
+                source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
                 url: Path_game_buyu.ui_buyu + 'hud/clip_2.png',
                 clipWidth: 22,
                 clipHeight: 25,
                 clipX: 11,
                 space: -5
             };
-            
+
             //HUD数字3
             this.HUD_FONT3 = {
-                source: PathGameTongyong.atlas_game_ui_tongyong+ "hud.atlas",
+                source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
                 url: Path_game_buyu.ui_buyu + 'hud/clip_3.png',
                 clipWidth: 22,
                 clipHeight: 25,
