@@ -41,38 +41,29 @@ module gamebuyu.page {
             this._viewUI.panel_0.vScrollBarSkin = "";
             this._viewUI.panel_1.vScrollBarSkin = "";
             //BOSS
-            this._viewUI.list_1.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_1.hScrollBarSkin = '';
             this._viewUI.list_1.scrollBar.elasticDistance = 100;
-            this._viewUI.list_1.spaceX = 5;
-            this._viewUI.list_1.spaceY = 5;
+            this._viewUI.list_1.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_1.renderHandler = new Handler(this, this.renderHandler1);
-            this._viewUI.list_1.array = this.getDataByType(BuyuGuiZePage.TYPE_BOSS);
+            this._viewUI.list_1.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_BOSS);
             //黄金鱼
-            this._viewUI.list_2.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_2.hScrollBarSkin = '';
             this._viewUI.list_2.scrollBar.elasticDistance = 100;
-            this._viewUI.list_2.spaceX = 5;
-            this._viewUI.list_2.spaceY = 5;
+            this._viewUI.list_2.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_2.renderHandler = new Handler(this, this.renderHandler1);
-            this._viewUI.list_2.array = this.getDataByType(BuyuGuiZePage.TYPE_GOLD);
+            this._viewUI.list_2.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_GOLD);
             //普通鱼
-            this._viewUI.list_3.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_3.hScrollBarSkin = '';
-            this._viewUI.list_3.repeatY = 2;
+            this._viewUI.list_3.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_3.scrollBar.elasticDistance = 100;
-            this._viewUI.list_3.spaceX = 5;
-            this._viewUI.list_3.spaceY = 5;
             this._viewUI.list_3.renderHandler = new Handler(this, this.renderHandler1);
-            this._viewUI.list_3.array = this.getDataByType(BuyuGuiZePage.TYPE_NORMAL);
-            //特属鱼
-            this._viewUI.list_4.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem2UI", HelpItem2);
+            this._viewUI.list_3.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_NORMAL);
+            //特殊鱼
             this._viewUI.list_4.hScrollBarSkin = '';
             this._viewUI.list_4.scrollBar.elasticDistance = 100;
-            this._viewUI.list_4.spaceX = 5;
-            this._viewUI.list_4.spaceY = 5;
-            this._viewUI.list_4.renderHandler = new Handler(this, this.renderHandler1);
-            this._viewUI.list_4.array = this.getDataByType(BuyuGuiZePage.TYPE_SPECIAL);
+            this._viewUI.list_4.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem2UI", HelpItem2);
+            this._viewUI.list_4.renderHandler = new Handler(this, this.renderHandler2);
+            this._viewUI.list_4.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_SPECIAL);
         }
 
         private selectHandler(index: number): void {
