@@ -38,7 +38,8 @@ module gamebuyu.page {
             super.onOpen();
             this._viewUI.tab_Type.selectHandler = new Handler(this, this.selectHandler);
             this._viewUI.tab_Type.selectedIndex = 0;
-            this._viewUI.panel_Content.vScrollBarSkin = "";
+            this._viewUI.panel_0.vScrollBarSkin = "";
+            this._viewUI.panel_1.vScrollBarSkin = "";
             //BOSS
             this._viewUI.list_1.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_1.hScrollBarSkin = '';
@@ -92,8 +93,8 @@ module gamebuyu.page {
         }
 
         private updateView(): void {
-            this._viewUI.box_0.visible = this._index == BuyuGuiZePage.TAB_BS;
-            this._viewUI.box_1.visible = this._index == BuyuGuiZePage.TAB_JJ;
+            this._viewUI.panel_0.visible = this._index == BuyuGuiZePage.TAB_BS;
+            this._viewUI.panel_1.visible = this._index == BuyuGuiZePage.TAB_JJ;
         }
 
         private getDataByType(type: number): any[] {
