@@ -36,7 +36,7 @@ module gamebuyu {
                 clipWidth: 18,
                 clipHeight: 24,
                 clipX: 11,
-                space: 0
+                space: -1
             };
 
             //加钱飘字
