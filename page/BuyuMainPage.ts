@@ -83,7 +83,6 @@ module gamebuyu.page {
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }
 
-
         // 重新布局
         protected layout(): void {
             super.layout();
