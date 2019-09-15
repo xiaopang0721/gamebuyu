@@ -64,6 +64,39 @@ module gamebuyu.page {
             this._viewUI.list_4.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem2UI", HelpItem2);
             this._viewUI.list_4.renderHandler = new Handler(this, this.renderHandler2);
             this._viewUI.list_4.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_SPECIAL);
+            this._viewUI.on(LEvent.MOUSE_DOWN, this, this.onMouseHandler);
+            this._viewUI.on(LEvent.MOUSE_MOVE, this, this.onMouseHandler);
+            this._viewUI.on(LEvent.MOUSE_UP, this, this.onMouseHandler);
+        }
+
+        private _downX: number;
+        private _downY: number;
+        private onMouseHandler(e: LEvent): void {
+            this._viewUI.list_1.mouseEnabled = true;
+            this._viewUI.list_2.mouseEnabled = true;
+            this._viewUI.list_3.mouseEnabled = true;
+            this._viewUI.list_4.mouseEnabled = true;
+            this._viewUI.panel_0.mouseEnabled = true;
+            this._viewUI.panel_1.mouseEnabled = true;
+            switch (e.type) {
+                case LEvent.MOUSE_DOWN:
+                    this._downX = e.stageX;
+                    this._downY = e.stageY;
+                    break;
+                case LEvent.MOUSE_MOVE:
+                    let diffX: number = Math.abs(this._downX - e.stageX);
+                    let diffY: number = Math.abs(this._downY - e.stageY);
+                    if (diffX > diffY) {
+                        this._viewUI.panel_0.mouseEnabled = false;
+                        this._viewUI.panel_1.mouseEnabled = false;
+                    } else {
+                        this._viewUI.list_1.mouseEnabled = false;
+                        this._viewUI.list_2.mouseEnabled = false;
+                        this._viewUI.list_3.mouseEnabled = false;
+                        this._viewUI.list_4.mouseEnabled = false;
+                    }
+                    break;
+            }
         }
 
         private selectHandler(index: number): void {
