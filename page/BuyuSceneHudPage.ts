@@ -56,6 +56,7 @@ module gamebuyu.page {
             this._targetV = new Vector2();
             BuyuPageDef.parseBuYuData(this._assetsLoader);
             this._ignoreButtonUI = [this._viewUI.btn_spread, this._viewUI.btn_qifu, this._viewUI.btn_Exit, this._viewUI.btn_Rule, this._viewUI.btn_Set, this._viewUI.btn_zhanji, this._viewUI.check_Aim, this._viewUI.check_Auto];
+            this._viewUI.btn_spread.left = this._game.isFullScreen ? 25 : 10;
         }
 
         // 页面打开时执行函数
