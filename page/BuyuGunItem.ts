@@ -86,7 +86,7 @@ module gamebuyu.page {
                 this._clip.anchorX = this._clip.anchorY = 0.5;
             }
             if (!this._goldClip) {
-                this._goldClip = new BuyuClip(BuyuClip.MONEY_FONT2);
+                this._goldClip = new BuyuClip(BuyuClip.MONEY_FONT);
                 this._viewUI.box_Gold.addChild(this._goldClip);
                 this._goldClip.pos(this._viewUI.clip_Gold.x, this._viewUI.clip_Gold.y);
                 this._viewUI.clip_Gold.removeSelf();

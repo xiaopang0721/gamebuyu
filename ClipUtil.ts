@@ -5,6 +5,8 @@ module gamebuyu {
     export class ClipUtil extends Laya.Box {
         //货币 金色
         public static MONEY_FONT2: any;
+        //游戏内货币 金色
+        public static MONEY_FONT: any;
         //加钱飘字
         public static ADD_MONEY_FONT: any;
         //扣钱飘字
@@ -24,6 +26,15 @@ module gamebuyu {
                 url: DatingPath.ui_dating + 'tongyong/clip_money1.png',
                 clipWidth: 16,
                 clipHeight: 22,
+                clipX: 11,
+                space: 0
+            };
+
+            this.MONEY_FONT = {
+                source: Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
+                url: Path_game_buyu.ui_buyu + 'hudscene/clip_rwxx.png',
+                clipWidth: 18,
+                clipHeight: 24,
                 clipX: 11,
                 space: 0
             };
