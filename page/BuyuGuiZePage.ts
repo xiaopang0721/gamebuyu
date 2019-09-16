@@ -64,40 +64,48 @@ module gamebuyu.page {
             this._viewUI.list_4.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem2UI", HelpItem2);
             this._viewUI.list_4.renderHandler = new Handler(this, this.renderHandler2);
             this._viewUI.list_4.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_SPECIAL);
-            // this._viewUI.on(LEvent.MOUSE_DOWN, this, this.onMouseHandler);
-            // this._viewUI.on(LEvent.MOUSE_MOVE, this, this.onMouseHandler);
-            // this._viewUI.on(LEvent.MOUSE_UP, this, this.onMouseHandler);
+            this._viewUI.on(LEvent.MOUSE_DOWN, this, this.onMouseHandler);
+            this._viewUI.on(LEvent.MOUSE_MOVE, this, this.onMouseHandler);
+            this._viewUI.on(LEvent.MOUSE_UP, this, this.onMouseHandler);
         }
 
-        // private _downX: number;
-        // private _downY: number;
-        // private onMouseHandler(e: LEvent): void {
-        //     this._viewUI.list_1.mouseEnabled = true;
-        //     this._viewUI.list_2.mouseEnabled = true;
-        //     this._viewUI.list_3.mouseEnabled = true;
-        //     this._viewUI.list_4.mouseEnabled = true;
-        //     this._viewUI.panel_0.mouseEnabled = true;
-        //     this._viewUI.panel_1.mouseEnabled = true;
-        //     switch (e.type) {
-        //         case LEvent.MOUSE_DOWN:
-        //             this._downX = e.stageX;
-        //             this._downY = e.stageY;
-        //             break;
-        //         case LEvent.MOUSE_MOVE:
-        //             let diffX: number = Math.abs(this._downX - e.stageX);
-        //             let diffY: number = Math.abs(this._downY - e.stageY);
-        //             if (diffX > diffY) {
-        //                 this._viewUI.panel_0.mouseEnabled = false;
-        //                 this._viewUI.panel_1.mouseEnabled = false;
-        //             } else {
-        //                 this._viewUI.list_1.mouseEnabled = false;
-        //                 this._viewUI.list_2.mouseEnabled = false;
-        //                 this._viewUI.list_3.mouseEnabled = false;
-        //                 this._viewUI.list_4.mouseEnabled = false;
-        //             }
-        //             break;
-        //     }
-        // }
+        //在有一方拖动的时候，另外一方不可拖动
+        private _downX: number;
+        private _downY: number;
+        private _isDown: boolean = false;
+        private onMouseHandler(e: LEvent): void {
+            switch (e.type) {
+                case LEvent.MOUSE_DOWN:
+                    this._isDown = true;
+                    this._downX = e.stageX;
+                    this._downY = e.stageY;
+                    break;
+                case LEvent.MOUSE_MOVE:
+                    if (!this._isDown) return;
+                    let diffX: number = Math.abs(this._downX - e.stageX);
+                    let diffY: number = Math.abs(this._downY - e.stageY);
+                    // console.log("打印移动间距", diffX, diffY);
+                    if (diffX > diffY) {
+                        this._viewUI.list_1.scrollBar.touchScrollEnable = true;
+                        this._viewUI.list_2.scrollBar.touchScrollEnable = true;
+                        this._viewUI.list_3.scrollBar.touchScrollEnable = true;
+                        this._viewUI.list_4.scrollBar.touchScrollEnable = true;
+                        this._viewUI.panel_0.vScrollBar.touchScrollEnable = false;
+                        this._viewUI.panel_1.vScrollBar.touchScrollEnable = false;
+                    } else {
+                        this._viewUI.panel_0.vScrollBar.touchScrollEnable = true;
+                        this._viewUI.panel_1.vScrollBar.touchScrollEnable = true;
+                        this._viewUI.list_1.scrollBar.touchScrollEnable = false;
+                        this._viewUI.list_2.scrollBar.touchScrollEnable = false;
+                        this._viewUI.list_3.scrollBar.touchScrollEnable = false;
+                        this._viewUI.list_4.scrollBar.touchScrollEnable = false;
+                    }
+                    break;
+                case LEvent.MOUSE_UP:
+                    this._isDown = false;
+                    break
+            }
+        }
 
         private selectHandler(index: number): void {
             this._index = index;
