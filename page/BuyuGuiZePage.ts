@@ -55,7 +55,6 @@ module gamebuyu.page {
             //普通鱼
             this._viewUI.list_3.hScrollBarSkin = '';
             this._viewUI.list_3.scrollBar.elasticDistance = 100;
-            this._viewUI.list_3.repeatX = 3;
             this._viewUI.list_3.itemRender = this.createChildren("game_ui.buyu.component.BangZhuItem1UI", HelpItem1);
             this._viewUI.list_3.renderHandler = new Handler(this, this.renderHandler1);
             this._viewUI.list_3.dataSource = this.getDataByType(BuyuGuiZePage.TYPE_NORMAL);
