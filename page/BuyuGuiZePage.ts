@@ -68,6 +68,10 @@ module gamebuyu.page {
             this._viewUI.on(LEvent.MOUSE_MOVE, this, this.onMouseHandler);
             this._viewUI.on(LEvent.MOUSE_UP, this, this.onMouseHandler);
         }
+        
+        protected onMouseDown(e: LEvent) {
+			return true;
+		}
 
         //在有一方拖动的时候，另外一方不可拖动
         private _downX: number;
