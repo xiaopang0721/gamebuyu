@@ -84,7 +84,6 @@ module gamebuyu.page {
             this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
-            this._game.network.addHanlder(Protocols.SMSG_OPERATION_FAILED, this, this.onOptHandler);
 
             this._viewUI.box_Left.anchorX = 0;
             this._viewUI.box_Right.anchorX = 1;
@@ -262,7 +261,7 @@ module gamebuyu.page {
                     });
                     break;
                 case this._viewUI.btn_qifu:
-                    this._game.uiRoot.general.open(TongyongPageDef.PAGE_TONGYONG_QIFU);
+                    this._game.uiRoot.general.open(DatingPageDef.PAGE_QIFU);
                     break;
             }
         }
@@ -531,22 +530,6 @@ module gamebuyu.page {
             this.updatePaoPos();
         }
 
-        private _nameStrInfo: string[] = ["xs", "px", "gsy", "gg", "cs", "tdg"];
-        protected onOptHandler(optcode: number, msg: any) {
-            if (msg.type == Operation_Fields.OPRATE_GAME) {
-                switch (msg.reason) {
-                    case Operation_Fields.OPRATE_GAME_QIFU_SUCCESS_RESULT:
-                        let dataInfo = JSON.parse(msg.data);
-                        //打开祈福动画界面
-                        let qifu_url = StringU.substitute(PathGameTongyong.ui_tongyong_qifu + "f_{0}1.png", this._nameStrInfo[dataInfo.qf_id - 1]);
-                        this._game.uiRoot.general.open(TongyongPageDef.PAGE_TONGYONG_QIFU_ANI, (page) => {
-                            page.dataSource = qifu_url;
-                        });
-                        break;
-                }
-            }
-        }
-
         public close(): void {
             if (this._viewUI) {
                 Laya.timer.clearAll(this);
@@ -572,7 +555,6 @@ module gamebuyu.page {
                 this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
-                this._game.network.removeHanlder(Protocols.SMSG_OPERATION_FAILED, this, this.onOptHandler);
 
                 if (this._gunItemList && this._gunItemList.length > 0) {
                     let len = this._gunItemList.length;
