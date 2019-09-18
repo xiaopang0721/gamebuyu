@@ -102,6 +102,7 @@ module gamebuyu.page {
             this._viewUI.btn_zhanji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_qifu.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._game.playMusic(Path.music + "buyu/bg.mp3");
+            this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
         }
 
         private onMapInfoChange() {
@@ -138,6 +139,19 @@ module gamebuyu.page {
             this._viewUI.check_Aim.selected = this._mainPlayer.fireType == BuyuPlayer.FIRE_TYPE_AIM;
             //自动
             this._viewUI.check_Auto.selected = this._mainPlayer.fireType == BuyuPlayer.FIRE_TYPE_AUTO;
+        }
+
+        private qifuFly(dataSource: any): void {
+            if (!dataSource) return;
+            let dataInfo = dataSource;
+            let mainView: BuyuGunItem;
+            for (let i = 0; i < this._gunItemList.length; i++) {
+                let _gunItem: BuyuGunItem = this._gunItemList[i];
+                if (_gunItem.isMainPlayer) {
+                    mainView = _gunItem;
+                }
+            }
+            this._game.qifuMgr.showFlayAni(mainView.viewUI.label_Name, this._viewUI, dataSource, null);
         }
 
         update(diff: number): void {
@@ -541,6 +555,7 @@ module gamebuyu.page {
                 this._viewUI.check_Auto.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_zhanji.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_qifu.off(LEvent.CLICK, this, this.onBtnClickWithTween);
+                this._game.qifuMgr.off(QiFuMgr.QIFU_FLY, this, this.qifuFly);
                 if (this._mainPlayer) {
                     // this._mainPlayer.off(BuyuPlayer.POSITION_CHANGED, this, this.onMainPlayerSitDown);
                     this._mainPlayer.off(BuyuPlayer.FIRE_TYPE_CHANGED, this, this.updateFireType);
