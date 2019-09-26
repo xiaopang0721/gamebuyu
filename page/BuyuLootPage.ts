@@ -150,7 +150,7 @@ module gamebuyu.page {
                 else
                     this._game.playSound(Path_game_buyu.music_buyu + "huangjinyu.mp3");
             } else {
-                this._game.playSound(Path_game_buyu.music_buyu + "yubaoqian.mp3");
+                this._game.playSound(Path_game_buyu.music_buyu + "yubaoqian.mp3", false);
             }
 
             if (awardGold > 0) {

@@ -6,8 +6,6 @@ module gamebuyu.manager {
 		private _owner: BuyuPlayer;
 		// 休息时间
 		private _restTime: number;
-		// 最后一次休息的时间
-		private _lastRestTimer: number;
 		// 目标
 		private _target: Fish;
 
@@ -15,7 +13,6 @@ module gamebuyu.manager {
 			super();
 			this._owner = owner;
 			this._restTime = 0;
-			this._lastRestTimer = 0;
 			this._findTime = 0;
 		}
 
@@ -26,19 +23,19 @@ module gamebuyu.manager {
 				return false;
 			}
 			this._owner.isDoFireing = false;
-			if (this._restTime) {
-				// 休息中
-				this._restTime -= deltaTime;
-				if (this._restTime < 0) {
-					this._restTime = 0;
-				}
-				return false;
-			}
-			if (Math.random() < 0.0008) {
-				// 几率非常的低 随机休息1~4秒
-				this._restTime = Math.random() * 3 + 1;
-				return false;
-			}
+			// if (this._restTime) {
+			// 	// 休息中
+			// 	this._restTime -= deltaTime;
+			// 	if (this._restTime < 0) {
+			// 		this._restTime = 0;
+			// 	}
+			// 	return false;
+			// }
+			// if (Math.random() < 0.0008) {
+			// 	// 几率非常的低 随机休息1~4秒
+			// 	this._restTime = Math.random() * 3 + 1;
+			// 	return false;
+			// }
 			// 找鱼
 			this.findFindTarget(deltaTime);
 			if(this._target){
