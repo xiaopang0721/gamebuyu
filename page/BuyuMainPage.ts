@@ -21,6 +21,10 @@ module gamebuyu.page {
                 Path_game_buyu.atlas_game_ui + "buyu/hud.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
+                Path_game_buyu.ui_buyu + "sk/buyu_0.png",
+                Path_game_buyu.ui_buyu + "sk/buyu_1.png",
+                Path_game_buyu.ui_buyu + "sk/buyu_2.png",
+                Path_game_buyu.ui_buyu + "sk/buyu_3.png",
                 Path.temp + "template.bin",
                 Path.temp + "fish_group.json",
             ];
@@ -33,9 +37,9 @@ module gamebuyu.page {
             this.addChild(this._viewUI);
 
             for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
-				this._viewUI.box_right._childs[index].visible = false;
-			}
-            
+                this._viewUI.box_right._childs[index].visible = false;
+            }
+
             BuyuPageDef.parseBuYuData(this._assetsLoader);
             for (let index = 0; index < 3; index++) {
                 if (!this._difenClipList[index]) {
