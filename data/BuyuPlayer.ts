@@ -102,7 +102,7 @@ module gamebuyu.data {
         }
 
         //炮射速间隔
-        private _fireSpeed: number = 1000 / 5;
+        private _fireSpeed: number = 250;//旧版200
 
         //开火状态
         private _fireState: number = 0;
@@ -307,7 +307,7 @@ module gamebuyu.data {
                 this.isBroke = this._gold < info.rateGold;
         }
 
-        // 更新蛇的朝向,用于补间
+        // 更新射的朝向,用于补间
         public updateOrientation(delateTime: number, isImmediately: boolean = false): boolean {
             if (isImmediately) {
                 let isEual = this._curOri.equal(this._ori);
@@ -407,7 +407,7 @@ module gamebuyu.data {
                 if (diff >= this._fireSpeed) {
                     //开火吧少年！
                     this.fire();
-                    this._game.playSound(Path_game_buyu.music_buyu + "fire.mp3");
+                    this._game.playSound(Path_game_buyu.music_buyu + "fire.mp3", false);
                     this._lastFireTime = nowTime;
                 }
             }
