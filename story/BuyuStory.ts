@@ -165,7 +165,7 @@ module gamebuyu.story {
 			this._firePosV1 = null;
 		}
 
-		
+
 
 		update(diff: number) {
 			this._buyuMgr && this._buyuMgr.update(diff);
@@ -240,7 +240,7 @@ module gamebuyu.story {
 				this._firePosV0.add(Vector2.temp);
 				bullet.init(msg.oid, this._firePosV0.x, this._firePosV0.y, this._firePosV1, msg.target_oid);
 				this._bullets.push(bullet);
-				player.event(BuyuPlayer.FIRE_IT);
+				player.event(BuyuPlayer.FIRE_IT, isSelf);
 			}
 		}
 

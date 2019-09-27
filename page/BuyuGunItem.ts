@@ -536,9 +536,10 @@ module gamebuyu.page {
             this._viewUI.img_qifu.visible = this._player.qifu_endTime > this._game.sync.serverTimeBys;
         }
 
-        private playFireAnim(): void {
+        private playFireAnim(isSelf): void {
             if (!this._player) return;
             if (this._paoAnim) {
+                if (!isSelf) this._game.playSound(Path_game_buyu.music_buyu + "fire.mp3", false);
                 this._paoAnim.play();
             }
         }
