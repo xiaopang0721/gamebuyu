@@ -81,6 +81,7 @@ module gamebuyu.page {
             //地图实例
 
             this.onMapInfoChange();
+            this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_APP_STATE_CHANGE, this, this.onAppStateChange);
             this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
@@ -103,6 +104,10 @@ module gamebuyu.page {
             this._viewUI.btn_zhanji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_qifu.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._game.playMusic(Path.music + "buyu/bg.mp3");
+        }
+
+        private onAppStateChange(state) {
+            this._game.network.call_set_app_state(state);
         }
 
         private onMapInfoChange() {
@@ -569,6 +574,7 @@ module gamebuyu.page {
                     this._buyuMgr.off(BuyuMgr.EVENT_REMOVE_PLAYER, this, this.checkRemoveBuyuPlayer);
                     this._buyuMgr.off(BuyuMgr.EVENT_UPDATE_MAIN_PLAYER, this, this.updateMainPlayer);
                 }
+                this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_APP_STATE_CHANGE, this, this.onAppStateChange);
                 this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
