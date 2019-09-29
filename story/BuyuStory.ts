@@ -165,7 +165,7 @@ module gamebuyu.story {
 			this._firePosV1 = null;
 		}
 
-		
+
 
 		update(diff: number) {
 			this._buyuMgr && this._buyuMgr.update(diff);
@@ -229,7 +229,14 @@ module gamebuyu.story {
 				let rate = player.fireLevel;
 				bullet.skin = SceneFishRes.getBulletSkin(rate);
 				bullet.hitSkin = SceneFishRes.getHitEffect(rate);
-				Vector2.temp.fromToward(msg.toward);
+				let toward = msg.toward;
+				if (msg.target_oid) { //锁鱼重新校正朝向（app切换后台心跳变慢导致朝向错误）
+					let fish = this._buyuMgr.getFishByOid(msg.target_oid);
+					let targetV = new Vector2();
+					targetV.set(fish.pos);
+					toward = this.towardTarget(targetV, posNum);
+				}
+				Vector2.temp.fromToward(toward);
 				this._firePosV1.x = Vector2.temp.x;
 				this._firePosV1.y = Vector2.temp.y;
 				player.ori = this._firePosV1;
@@ -240,8 +247,25 @@ module gamebuyu.story {
 				this._firePosV0.add(Vector2.temp);
 				bullet.init(msg.oid, this._firePosV0.x, this._firePosV0.y, this._firePosV1, msg.target_oid);
 				this._bullets.push(bullet);
-				player.event(BuyuPlayer.FIRE_IT);
+				player.event(BuyuPlayer.FIRE_IT, isSelf);
 			}
+		}
+		
+		//根据目标鱼的位置和炮台位置计算开火朝向
+		public towardTarget(targetPos: Vector2, pos): number {
+			let paoV = SceneFishRes.PAO_POSDATA[pos];
+			Vector2.temp.set(targetPos);
+			let toward = Vector2.temp.sub(paoV).getToward();
+			let min = pos <= 2 ? SceneFishRes.MIN_TOWARD : Vector2.TowardCount - SceneFishRes.MAX_TOWARD;
+			let max = pos <= 2 ? SceneFishRes.MAX_TOWARD : Vector2.TowardCount - SceneFishRes.MIN_TOWARD;
+			if (pos <= 2) {
+				if (toward < 32) toward = 128;
+			} else {
+				if (toward > 96) toward = 0;
+			}
+			toward = toward < min ? min : toward;
+			toward = toward > max ? max : toward;
+			return toward;
 		}
 
 		// 电鱼结果

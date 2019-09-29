@@ -412,6 +412,7 @@ module gamebuyu.page {
         clearUI(): void {
             this._viewUI.box_DengDai.visible = true;
             this._viewUI.box_Player.visible = false;
+            this._viewUI.box_ZhuanPan.visible = false;
             this._viewUI.box_PlayerInfo.visible = false;
             this._game.sceneObjectMgr.off(BuyuMgr.EVENT_KILL_FISH, this, this.onKillFish);
             this._buyuMgr && this._buyuMgr.off(BuyuMgr.EVENT_UPDATE_MAIN_PLAYER, this, this.onMainPlayer);
@@ -542,9 +543,10 @@ module gamebuyu.page {
             this._viewUI.img_qifu.visible = this._player.qifu_endTime > this._game.sync.serverTimeBys;
         }
 
-        private playFireAnim(): void {
+        private playFireAnim(isSelf): void {
             if (!this._player) return;
             if (this._paoAnim) {
+                if (!isSelf) this._game.playSound(Path_game_buyu.music_buyu + "fire.mp3", false);
                 this._paoAnim.play();
             }
         }
