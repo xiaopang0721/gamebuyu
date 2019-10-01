@@ -81,7 +81,6 @@ module gamebuyu.page {
             //地图实例
 
             this.onMapInfoChange();
-            this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_APP_STATE_CHANGE, this, this.onAppStateChange);
             this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
@@ -106,8 +105,18 @@ module gamebuyu.page {
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }
 
-        private onAppStateChange(state) {
-            this._game.network.call_set_app_state(state);
+        private _isVisibility:boolean;
+        private checkStageVisiable(isVisibility:boolean) {
+            if (this._isVisibility == isVisibility) {
+                return;
+            }
+            if (this._mainPlayer.isRoomMaster && !isVisibility) {
+                this._game.network.call_set_app_state(Web_operation_fields.APP_STATE_TYPE_MINIMIZE);
+            }
+            if (isVisibility) {
+                this._game.network.call_set_app_state(Web_operation_fields.APP_STATE_TYPE_NORMAL);
+            }
+            this._isVisibility = isVisibility;
         }
 
         private onMapInfoChange() {
@@ -146,8 +155,9 @@ module gamebuyu.page {
             this._viewUI.check_Auto.selected = this._mainPlayer.fireType == BuyuPlayer.FIRE_TYPE_AUTO;
         }
 
-        update(diff: number): void {
+        update(diff: number): void {            
             if (!this._viewUI) return;
+            this.checkStageVisiable(Laya.stage.isVisibility);
             let nowServerTime: number = this._game.sync.serverTimeBys;
             this.updateAim(diff);
             this.checkYC(nowServerTime);//检查鱼潮来了
@@ -574,7 +584,6 @@ module gamebuyu.page {
                     this._buyuMgr.off(BuyuMgr.EVENT_REMOVE_PLAYER, this, this.checkRemoveBuyuPlayer);
                     this._buyuMgr.off(BuyuMgr.EVENT_UPDATE_MAIN_PLAYER, this, this.updateMainPlayer);
                 }
-                this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_APP_STATE_CHANGE, this, this.onAppStateChange);
                 this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onMapInfoChange);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
                 this._game.sceneObjectMgr.off(BuyuMapInfo.EVENT_FISH_EVENT, this, this.onUpdateMapEvent);
