@@ -221,8 +221,8 @@ module gamebuyu.manager {
             idx++;
             // 这条鱼在鱼群中的偏移位置
             line.vec2.forEach(v => {
-                // if(line.id == 35001){
-                // 	logd("==================vec",v.x,v.y)
+                // if(line.id == 20002){
+                // 	logd("==================vec",index,v.x,v.y);
                 // }
                 outPath[idx] = v.clone().add(offsetInGroup);
                 idx++;
@@ -264,9 +264,9 @@ module gamebuyu.manager {
 
             // 生成这条的移动路线
             this.buildPath(info, index, line, outPath);
-            // if(lineID == 35001){
+            // if(lineID == 20002){
             // 	for (let poss of outPath) {
-            // 		logd("outPath:",poss.x,poss.y,info.len_head);
+            // 		logd("outPath:",index,poss.x,poss.y,info.len_head);
             // 	}
             // }
 

@@ -62,7 +62,9 @@ module gamebuyu.manager {
 			this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_ADD_UNIT, this, this.checkAddBuyuPlayer);
 			this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_REMOVE_UNIT, this, this.checkRemoveBuyuUnit);
 			this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_MAIN_UNIT_CHANGE, this, this.updateMainBuyuPlayer);
+			this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_LOAD_MAP, this, this.onMapLoaded);
 			this._game.sceneObjectMgr.on(BuyuPlayer.POSITION_CHANGED, this, this.onUpdateMainPos);
+			this._isInitUnit = false;
 			let unitArr = this._game.sceneObjectMgr.unitDic;
 			for (let key in unitArr) {
 				let unit = unitArr[key];
@@ -71,7 +73,7 @@ module gamebuyu.manager {
 			this.resize(this._game.clientWidth, this._game.clientHeight);
 			//主玩家
 			this.updateMainBuyuPlayer(this._game.sceneObjectMgr.mainUnit);
-		}
+		}		
 
 		resize(w: number, h: number): void {
 			//重置炮台位置
@@ -124,6 +126,18 @@ module gamebuyu.manager {
 			this.event(BuyuMgr.EVENT_CAMER_FZ);
 		}
 
+		private _isInitUnit:boolean;
+		private onMapLoaded() {
+			if (!this._game.sceneObjectMgr.mapInfo || this._isInitUnit) 
+				return;			
+			let unitArr = this._game.sceneObjectMgr.unitDic;
+			for (let key in unitArr) {
+				let unit = unitArr[key];
+				if (unit.type == Unit.TYPE_ID_FISH)
+					this.checkAddBuyuPlayer(unit);
+			}
+		}
+
 		/**
 		 * 检查Unit是否是BuyuPlayer是的话加入数组
 		 * @param unit 精灵
@@ -145,6 +159,10 @@ module gamebuyu.manager {
 				this._buyuPlayerList[unit.oid] = player;
 				this.event(BuyuMgr.EVENT_ADD_PLAYER, player);
 			} else if (type == Unit.TYPE_ID_FISH) {
+				if (!this._game.sceneObjectMgr.mapInfo) {
+					return;
+				}
+				this._isInitUnit = true;
 				let fish = new Fish(unit, this._game.sceneObjectMgr);
 				this._fishList[unit.oid] = fish;
 			}
@@ -282,9 +300,11 @@ module gamebuyu.manager {
 
 		clear(): void {
 			logd("=====buyumgr clear")
+			this._isInitUnit = false;
 			this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_ADD_UNIT, this, this.checkAddBuyuPlayer);
 			this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_REMOVE_UNIT, this, this.checkRemoveBuyuUnit);
 			this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_MAIN_UNIT_CHANGE, this, this.updateMainBuyuPlayer);
+			this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_LOAD_MAP, this, this.onMapLoaded);
 			this._game.sceneObjectMgr.off(BuyuPlayer.POSITION_CHANGED, this, this.onUpdateMainPos);
 			this._game.mainScene.camera.flipV = false;
 			for (let key in this._buyuPlayerList) {
