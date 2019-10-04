@@ -511,11 +511,11 @@ module gamebuyu.page {
                     this._game.uiRoot.HUD.open(BuyuPageDef.PAGE_BUYU_FISH);
                 }
                 //地图随机
-                let mapAssetInfo = this._game.sceneObjectMgr.mapAssetInfo;
-                if (mapAssetInfo && mapAssetInfo.id && mapAssetInfo.id.length) {
-                    mapAssetInfo.imgId = mapAssetInfo.id + MathU.randomRange(Web_operation_fields.GAME_ROOM_CONFIG_FISH_1, Web_operation_fields.GAME_ROOM_CONFIG_FISH_4);
-                    this._game.mainScene && this._game.mainScene.changeMap(mapAssetInfo);
-                }
+                // let mapAssetInfo = this._game.sceneObjectMgr.mapAssetInfo;
+                // if (mapAssetInfo && mapAssetInfo.id && mapAssetInfo.id.length) {
+                //     mapAssetInfo.imgId = mapAssetInfo.id + MathU.randomRange(Web_operation_fields.GAME_ROOM_CONFIG_FISH_1, Web_operation_fields.GAME_ROOM_CONFIG_FISH_4);
+                //     this._game.mainScene && this._game.mainScene.changeMap(mapAssetInfo);
+                // }
             }
         }
 
