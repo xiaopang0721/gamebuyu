@@ -341,7 +341,7 @@ module gamebuyu.data {
                     poss.x -= (poss.x - centerX) * 2;
                 }
             }
-            // logd("=============fish move",this._bornTime,now,moveTime,this._moveSpeed,path,lineID,groupID,this._pos);
+            // logd("=============fish move",index,this._bornTime,now,moveTime,this._moveSpeed,path,lineID,groupID,this._pos);
             // 直接同步方向,不需要做缓动
             this.ori = this._wantToOri;
             // 将坐标同步到ai那边去
