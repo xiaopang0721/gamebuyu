@@ -221,7 +221,7 @@ module gamebuyu.manager {
             idx++;
             // 这条鱼在鱼群中的偏移位置
             line.vec2.forEach(v => {
-                // if(line.id == 20002){
+                // if(index == 100){
                 // 	logd("==================vec",index,v.x,v.y);
                 // }
                 outPath[idx] = v.clone().add(offsetInGroup);
@@ -229,7 +229,8 @@ module gamebuyu.manager {
             });
         }
 
-        private static findPosInPath(path: Array<Vector2>, len: number, outPos: Vector2): number {
+        private static findPosInPath(path: Array<Vector2>, moveSeconds: number, speed: number, outPos: Vector2): number[] {
+            let len: number = moveSeconds * speed;
             let total: number = 0;
             let plen: number = path.length;
             for (let i = 1; i < plen; i++) {
@@ -241,11 +242,12 @@ module gamebuyu.manager {
                 if (len < total) {
                     let t = 1 - (total - len) / dist;
                     outPos.set(prev).lerp(cur, t);
-                    return i - 1;
+                    return [i - 1, 0];
                 }
             }
+            let leftSeconds: number = (len - total) / speed;
             outPos.set(path[plen - 1]);
-            return -1;
+            return [-1, leftSeconds];
         }
 
 		/**
@@ -264,18 +266,18 @@ module gamebuyu.manager {
 
             // 生成这条的移动路线
             this.buildPath(info, index, line, outPath);
-            // if(lineID == 20002){
+            // if(index == 100){
             // 	for (let poss of outPath) {
             // 		logd("outPath:",index,poss.x,poss.y,info.len_head);
             // 	}
             // }
 
             // 取得当前鱼所有的路线节点
-            let i: number = this.findPosInPath(outPath, moveSeconds * line.speed, outPos);
+            let iAndTime: number[] = this.findPosInPath(outPath, moveSeconds, line.speed, outPos);
 
             // 根据节点所在位置剃除节点
-            if (i >= 0) {
-                outPath.splice(0, i + 1);
+            if (iAndTime[0] >= 0) {
+                outPath.splice(0, iAndTime[0] + 1);
                 outOri.set(outPath[0]).sub(outPos).normalize();
             } else {
                 let length = outPath.length;
@@ -285,6 +287,7 @@ module gamebuyu.manager {
                 Vector2.temp.set(outOri).len = dist;
                 outPath[0].add(Vector2.temp);
             }
+            return iAndTime[1];
         }
     }
 }

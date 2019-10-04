@@ -324,7 +324,7 @@ module gamebuyu.data {
             // }
 
             // 获取移动路径
-            FishGroupPathManager.getPostion(groupID, index, lineID, moveTime, this.pos, this._wantToOri, path);
+            let leftSeconds: number = FishGroupPathManager.getPostion(groupID, index, lineID, moveTime, this.pos, this._wantToOri, path);
 
             // 是否翻转路径
             this._formLeft = this._unit.GetFromLeft() != 0;
@@ -341,11 +341,13 @@ module gamebuyu.data {
                     poss.x -= (poss.x - centerX) * 2;
                 }
             }
-            // logd("=============fish move",index,this._bornTime,now,moveTime,this._moveSpeed,path,lineID,groupID,this._pos);
+            //if (index == 100)
+            //    logd("=============fish move",index,this._bornTime,now,moveTime,this._moveSpeed,path,lineID,groupID,this._pos);
             // 直接同步方向,不需要做缓动
             this.ori = this._wantToOri;
             // 将坐标同步到ai那边去
             let action: ActionMovePath = new ActionMovePath(this, path);
+            this.updateLocal(leftSeconds)
 
             this._actionManager.exec(action);
             this.LinePosList = [this._pos.clone()];
