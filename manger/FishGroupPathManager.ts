@@ -286,8 +286,11 @@ module gamebuyu.manager {
                 outPath.splice(0, length - 1);
                 Vector2.temp.set(outOri).len = dist;
                 outPath[0].add(Vector2.temp);
+                // 补偿坐标
+                let offset: number = line.speed * iAndTime[1];
+                Vector2.temp.set(outOri).len = offset;
+                outPos.add(Vector2.temp);
             }
-            return iAndTime[1];
         }
     }
 }

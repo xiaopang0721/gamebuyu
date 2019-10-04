@@ -201,6 +201,7 @@ module gamebuyu.data {
             this._ori = new Vector2();
             this._wantToOri = new Vector2();
             this.speedScale = 1;
+            this._isVisibility = Laya.stage.isVisibility;
             unit.AddListen(UnitField.UNIT_INT_ENTRY, this, this.updateEntry);
             unit.AddListen(UnitField.UNIT_INT_BORN_TIME, this, this.updateInfo);
             unit.AddListen(UnitField.UNIT_INT_LINE_I_D, this, this.updateInfo);
@@ -324,7 +325,7 @@ module gamebuyu.data {
             // }
 
             // 获取移动路径
-            let leftSeconds: number = FishGroupPathManager.getPostion(groupID, index, lineID, moveTime, this.pos, this._wantToOri, path);
+            FishGroupPathManager.getPostion(groupID, index, lineID, moveTime, this.pos, this._wantToOri, path);
 
             // 是否翻转路径
             this._formLeft = this._unit.GetFromLeft() != 0;
@@ -347,7 +348,6 @@ module gamebuyu.data {
             this.ori = this._wantToOri;
             // 将坐标同步到ai那边去
             let action: ActionMovePath = new ActionMovePath(this, path);
-            this.updateLocal(leftSeconds)
 
             this._actionManager.exec(action);
             this.LinePosList = [this._pos.clone()];
@@ -355,8 +355,22 @@ module gamebuyu.data {
         }
 
         LinePosList: Array<Vector2>;
+        private _isVisibility:boolean;
 
         update(diff: number): void {
+            // 进后台了就不管
+            if (!Laya.stage.isVisibility) {
+                this._isVisibility = Laya.stage.isVisibility;
+                return;
+            }
+            // 刚切回前台
+            if (!this._isVisibility) {
+                this.pos.set(Vector2.zero.clone());
+                this._wantToOri.set(Vector2.zero.clone());
+                this._isChangePos = true;
+            }
+            this._isVisibility = Laya.stage.isVisibility;
+            
             // 如果服务端坐标有发生变化
             if (this._isChangePos) {
                 this.checkPosition();
