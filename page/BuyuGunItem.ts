@@ -18,6 +18,9 @@ module gamebuyu.page {
 
         //炮台视图对象
         private _viewUI: ui.nqp.game_ui.buyu.component.BuYu_GunItemUI;
+        get viewUI(){
+            return this._viewUI;
+        }
         //炮台逻辑位置
         private _logicPos: number;
         get logicPos() {
@@ -44,6 +47,9 @@ module gamebuyu.page {
         private _goldClip: BuyuClip;
         //是否是主玩家
         private _isMainPlayer: boolean = false;
+        get isMainPlayer() {
+            return this._isMainPlayer;
+        }
         //炮动画
         private _paoAnim: UIFrameAnimation;
         //倍数
