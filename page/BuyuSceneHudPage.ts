@@ -121,6 +121,7 @@ module gamebuyu.page {
 
         private onMapInfoChange() {
             this._mapInfo = this._game.sceneObjectMgr.mapInfo;
+            this._viewUI.btn_qifu.visible = this._mapInfo && this._mapInfo.GetMapLevel() != Web_operation_fields.GAME_ROOM_CONFIG_FISH_1;
         }
 
         protected onMouseClick(e: LEvent) {
