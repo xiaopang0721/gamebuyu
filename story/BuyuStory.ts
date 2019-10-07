@@ -207,7 +207,7 @@ module gamebuyu.story {
 		private _firePosV0: Vector2 = new Vector2();
 		private _firePosV1: Vector2 = new Vector2();
 		protected onStartFireResult(optcode: number, msg: hanlder.s2c_start_fire_result, fromClient?: boolean): void {
-			if (!this._buyuMgr) return;
+			if (!this._buyuMgr || !Laya.stage.isVisibility) return;
 			let objectMgr = this._game.sceneObjectMgr;
 			let isSelf: boolean = objectMgr.mainUnit && objectMgr.mainUnit.oid == msg.oid;
 			if (!fromClient && isSelf) {

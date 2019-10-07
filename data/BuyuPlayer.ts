@@ -344,7 +344,7 @@ module gamebuyu.data {
             }
 
             //如果是机器人 或 主玩家 才需要选择目标和开火
-            if (this._isRobot || this._isMainPlayer) {
+            if (Laya.stage.isVisibility && (this._isRobot || this._isMainPlayer)) {
                 //瞄准
                 if (this._fireType == BuyuPlayer.FIRE_TYPE_AIM) {
                     //如果是瞄准 要拿到瞄准的ID
