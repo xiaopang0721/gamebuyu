@@ -52,7 +52,7 @@ module gamebuyu.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
+				DatingPath.atlas_dating_ui + "qifu.atlas",
 				Path_game_buyu.atlas_game_ui + "buyu/hud.atlas",
 				Path_game_buyu.atlas_game_ui + 'buyu/bosslaixi.atlas',
 				Path_game_buyu.atlas_game_ui + 'buyu/guize.atlas',

@@ -34,7 +34,7 @@ module gamebuyu.page {
                 Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
-                PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
+                DatingPath.atlas_dating_ui + "qifu.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/pao.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
