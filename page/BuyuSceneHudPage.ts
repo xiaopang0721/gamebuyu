@@ -550,11 +550,16 @@ module gamebuyu.page {
             }
             super.layout();
             if (this._viewUI) {
-                if (this._game.uiRoot && this._view) {
-                    this._viewUI.box_Right.x = this._clientRealWidth - this._game.uiRoot.x - this._view.x - 5;
-                    this._viewUI.btn_Exit.x = this._clientRealWidth - this._game.uiRoot.x - this._view.x - 5
-                    // this._viewUI.box_Left.x = -this._game.uiRoot.x - this._view.x;
-                    this._viewUI.box_Left.x = - this._game.uiRoot.x - this._view.x + 5;
+                if (this._game.isFullScreen && this._view) {
+                    this._viewUI.box_Left.left = 20;
+                    this._viewUI.box_Right.right = 55;
+                    this._viewUI.btn_qifu.right = 115;
+                    this._viewUI.btn_Exit.right = 40;
+                } else {
+                    this._viewUI.box_Left.left = 10;
+                    this._viewUI.box_Right.right = 20;
+                    this._viewUI.btn_qifu.right = 92;
+                    this._viewUI.btn_Exit.right = 18;
                 }
             }
             this.updatePaoPos();
