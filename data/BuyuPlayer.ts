@@ -97,9 +97,6 @@ module gamebuyu.data {
          * 祈福结束时间
          */
         private _qifu_endTime: number = 0;
-        get qifu_endTime() {
-            return this._qifu_endTime;
-        }
 
         //炮射速间隔
         private _fireSpeed: number = 250;//旧版200
@@ -218,7 +215,7 @@ module gamebuyu.data {
             unit.AddListen(Unit.UNIT_INT_BYTE3, this, this.checkUpdate);
             unit.AddListen(Unit.UNIT_INT_BYTE2, this, this.checkUpdate2);
             unit.AddListen(Unit.UNIT_INT_BYTE1, this, this.updatePosition);
-            unit.AddListen(Unit.UNIT_INT_QI_FU_END_TIME, this, this.updateQiFu);
+            unit.AddListensSeq(Unit.UNIT_INT_Q_F_END_TIME, Unit.UNIT_INT_Q_F_END_TIME + 6, this, this.updateQiFu);
             this.updateType();
             this.updatePosition();
             this.updateGold();
@@ -506,6 +503,7 @@ module gamebuyu.data {
                 this._unit.removeListene(Unit.UNIT_INT_BYTE2, this, this.checkUpdate2);
                 this._unit.removeListene(Unit.UNIT_INT_BYTE1, this, this.updatePosition);
                 this._unit.removeListene(Unit.UNIT_INT_QI_FU_END_TIME, this, this.updateQiFu);
+                this._unit.removeListenesSeq(Unit.UNIT_INT_Q_F_END_TIME, Unit.UNIT_INT_Q_F_END_TIME + 6, this, this.updateQiFu);
             }
             if (this._buyuMgr) {
                 this._buyuMgr.off(BuyuMgr.EVENT_UPDATE_MAIN_PLAYER, this, this.updateMainPlayer);
