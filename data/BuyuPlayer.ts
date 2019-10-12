@@ -190,6 +190,11 @@ module gamebuyu.data {
             return this._isDoFireing;
         }
 
+        // 是否有祈福
+        get isHaveQifu(): boolean {
+            return TongyongUtil.getIsHaveQiFu(this._unit, this._game.sync.serverTimeBys)
+        }
+
         //选中的鱼
         public selectFish: Fish;
         public selectFishList: Fish[];

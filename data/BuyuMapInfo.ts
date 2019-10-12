@@ -5,6 +5,8 @@ module gamebuyu.data {
         static EVENT_BOSS_EVENT: string = "BuyuMapInfo.EVENT_BOSS_EVENT";
         //鱼潮来袭
         static EVENT_FISH_EVENT: string = "BuyuMapInfo.EVENT_FISH_EVENT";
+        
+        static EVENT_SEATED_LIST: string = "BuyuMapInfo.EVENT_SEATED_LIST";
 
         private _yclxTime: number = 0;
 		/**
@@ -36,6 +38,9 @@ module gamebuyu.data {
                 // logd("================= BuyuMapInfo.onUpdate " + this._yclxTime);
                 this._sceneObjectMgr.event(BuyuMapInfo.EVENT_FISH_EVENT);
             }
+            if (isNew || strmask.GetBit(MapField.MAP_STR_SEATED_LIST)) {
+				this._sceneObjectMgr.event(BuyuMapInfo.EVENT_SEATED_LIST);
+			}
         }
 
         update(diff: number): void {

@@ -540,7 +540,7 @@ module gamebuyu.page {
         //改变祈福状态
         private updateQiFu(qifu_endtime?: number): void {
             if (!this._player) return;
-            this._viewUI.img_qifu.visible = this._player.qifu_endTime > this._game.sync.serverTimeBys;
+            this._viewUI.img_qifu.visible = this._player.isHaveQifu;
         }
 
         private playFireAnim(isSelf): void {
