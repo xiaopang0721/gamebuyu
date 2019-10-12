@@ -159,6 +159,7 @@ module gamebuyu.page {
         private qifuFly(dataSource: any): void {
             if (!dataSource) return;
             let dataInfo = dataSource;
+            if (!this._game.sceneObjectMgr || !this._game.sceneObjectMgr.mainUnit || this._game.sceneObjectMgr.mainUnit.GetIndex() != dataSource.qifu_index) return;
             let mainView: BuyuGunItem;
             for (let i = 0; i < this._gunItemList.length; i++) {
                 let _gunItem: BuyuGunItem = this._gunItemList[i];
