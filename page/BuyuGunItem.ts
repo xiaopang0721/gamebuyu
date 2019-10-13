@@ -73,8 +73,8 @@ module gamebuyu.page {
             //初始化UI
             this.initGunView();
             //注册点击事件
-            this._viewUI.btn_Add.on(LEvent.MOUSE_DOWN, this, this.onClickDown);
-            this._viewUI.btn_Dec.on(LEvent.MOUSE_DOWN, this, this.onClickDown);
+            this._viewUI.btn_Add.on(LEvent.CLICK, this, this.onClickDown);
+            this._viewUI.btn_Dec.on(LEvent.CLICK, this, this.onClickDown);
             this._viewUI.image_Tips.visible = false;
             this.mouseThrough = true;
             this._viewUI.mouseThrough = true;
@@ -122,19 +122,20 @@ module gamebuyu.page {
 		 * 点击事件
 		 */
         private onClickDown(e: LEvent): void {
-            this._game.uiRoot.btnTween(e.currentTarget);
-            switch (e.currentTarget) {
-                case this._viewUI.btn_Add:
-                    if (this._player) {
-                        this.changeRate(this._player.fireLevel + 1);
-                    }
-                    break;
-                case this._viewUI.btn_Dec:
-                    if (this._player) {
-                        this.changeRate(this._player.fireLevel - 1);
-                    }
-                    break;
-            }
+            this._game.uiRoot.btnTween(e.currentTarget, this, (arg, btn)=>{
+                switch (btn) {
+                    case this._viewUI.btn_Add:
+                        if (this._player) {
+                            this.changeRate(this._player.fireLevel + 1);
+                        }
+                        break;
+                    case this._viewUI.btn_Dec:
+                        if (this._player) {
+                            this.changeRate(this._player.fireLevel - 1);
+                        }
+                        break;
+                }
+            });
         }
 
 		/**
