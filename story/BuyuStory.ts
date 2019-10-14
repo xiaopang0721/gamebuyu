@@ -223,10 +223,23 @@ module gamebuyu.story {
 				let pos = SceneFishRes.getPaoPos(posNum);
 				this._firePosV0.x = pos.x;
 				this._firePosV0.y = pos.y;
-				let bullet = objectMgr.createOfflineObject(Bullet.TYPE, Bullet) as Bullet;
-				bullet.canColloder = msg.target_oid == 0; // 全部客户端碰撞（锁定的不参与碰撞）
-				bullet.pos.radius = 16;
+				let radius = 16;
 				let rate = player.fireLevel;
+				let bullet = objectMgr.createOfflineObject(Bullet.TYPE, Bullet) as Bullet;
+				switch (rate) {
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+						radius = 16 * 1.5;
+						break;
+					case 10:
+						radius = 16 * 2;
+						break;
+				}
+				bullet.canColloder = msg.target_oid == 0; // 全部客户端碰撞（锁定的不参与碰撞）
+				bullet.pos.radius = radius;
 				bullet.skin = SceneFishRes.getBulletSkin(rate);
 				bullet.hitSkin = SceneFishRes.getHitEffect(rate);
 				let toward = msg.toward;
@@ -250,7 +263,7 @@ module gamebuyu.story {
 				player.event(BuyuPlayer.FIRE_IT, isSelf);
 			}
 		}
-		
+
 		//根据目标鱼的位置和炮台位置计算开火朝向
 		public towardTarget(targetPos: Vector2, pos): number {
 			let paoV = SceneFishRes.PAO_POSDATA[pos];

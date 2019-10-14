@@ -510,7 +510,7 @@ module gamebuyu.page {
         private _ycTime: number = 0;
         private _isCanShowYC: boolean = true;//是否能显示鱼潮动画
         private onUpdateMapEvent(): void {
-            logd("================= BuyuSceneHudPage.onUpdateMapEvent");
+            // logd("================= BuyuSceneHudPage.onUpdateMapEvent");
             if (!this._mapInfo) return;
             this._ycTime = this._mapInfo.GetYuChaoLaiQiTime();
             this._isCanShowYC = false;

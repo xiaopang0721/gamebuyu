@@ -86,7 +86,8 @@ module gamebuyu.scene {
             matrix.ty += drawY;
             fg.drawTexture(texture, 0, 0, tw, th, matrix);
 
-            // this.drawHitPoint(diff, pg, scene);
+            if (isShowDebug)
+                this.drawHitPoint(diff, pg, scene);
         }
 
         // 绘制碰撞点
