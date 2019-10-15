@@ -18,7 +18,7 @@ module gamebuyu.page {
 
         //炮台视图对象
         private _viewUI: ui.nqp.game_ui.buyu.component.BuYu_GunItemUI;
-        get viewUI(){
+        get viewUI() {
             return this._viewUI;
         }
         //炮台逻辑位置
@@ -122,7 +122,7 @@ module gamebuyu.page {
 		 * 点击事件
 		 */
         private onClickDown(e: LEvent): void {
-            this._game.uiRoot.btnTween(e.currentTarget, this, (arg, btn)=>{
+            this._game.uiRoot.btnTween(e.currentTarget, this, (arg, btn) => {
                 switch (btn) {
                     case this._viewUI.btn_Add:
                         if (this._player) {
@@ -478,7 +478,7 @@ module gamebuyu.page {
                         this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
                     }, () => {
                         this._game.sceneObjectMgr.leaveStory(true);
-                    }, null, null);
+                    }, true, TongyongPageDef.TIPS_SKIN_STR['cz']);
                 } else {
                     //体验场 
                     let temp: any = Template.getConfigTempById(1);
