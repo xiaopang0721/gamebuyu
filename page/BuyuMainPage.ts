@@ -152,7 +152,7 @@ module gamebuyu.page {
                 if (ccb) {
                     ccb();
                 }
-            }, true);
+            }, true,Tips.TIPS_SKIN_STR["cz"]);
         }
 
         public close(): void {
