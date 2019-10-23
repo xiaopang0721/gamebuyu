@@ -3,8 +3,8 @@
 */
 module gamebuyu.page {
     export class BuyuGuiZePage extends game.gui.base.Page {
-        static TAB_BS: number = 0;//倍數
-        static TAB_JJ: number = 1;//简介
+        static TAB_JJ: number = 0;//简介
+        static TAB_BS: number = 1;//倍數
 
         static TYPE_NORMAL: number = 1;
         static TYPE_GOLD: number = 2;
@@ -129,8 +129,8 @@ module gamebuyu.page {
         }
 
         private updateView(): void {
-            this._viewUI.panel_0.visible = this._index == BuyuGuiZePage.TAB_BS;
-            this._viewUI.panel_1.visible = this._index == BuyuGuiZePage.TAB_JJ;
+            this._viewUI.panel_0.visible = this._index == BuyuGuiZePage.TAB_JJ;
+            this._viewUI.panel_1.visible = this._index == BuyuGuiZePage.TAB_BS;
         }
 
         private getDataByType(type: number): any[] {
