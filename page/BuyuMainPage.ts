@@ -149,9 +149,10 @@ module gamebuyu.page {
             if (haveMoney < roomInfo.minGold) {
                 let str = StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", roomInfo.minGold);
                 this.gotoRecharge(str);
-            } else if (mode >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3) {
-                if (!this.checkVipLevel()) return;
             } else {
+                if (mode >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3) {
+                    if (!this.checkVipLevel()) return;
+                }
                 //进入
                 this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, mode.toString(), true);
             }
