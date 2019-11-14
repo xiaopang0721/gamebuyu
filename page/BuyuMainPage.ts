@@ -113,8 +113,8 @@ module gamebuyu.page {
                 case this._viewUI.btn_join:
                     let maplv = TongyongUtil.getJoinMapLv(BuyuPageDef.GAME_NAME, mainPlayer.playerInfo.money);
                     if (!maplv) return;
-                    //后两个场次需要vip1才可以进去
-                    if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3) {
+                    //后两个场次需要vip1才可以进去(非api条件下)
+                    if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
                         if (!this.checkVipLevel()) return;
                     }
                     this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, maplv.toString(), true);
@@ -151,7 +151,7 @@ module gamebuyu.page {
                 let str = StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", roomInfo.minGold);
                 this.gotoRecharge(str);
             } else {
-                if (mode >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3) {
+                if (mode >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
                     if (!this.checkVipLevel()) return;
                 }
                 //进入
