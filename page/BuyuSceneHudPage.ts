@@ -110,7 +110,7 @@ module gamebuyu.page {
             if (this._isVisibility == isVisibility) {
                 return;
             }
-            if (this._mainPlayer.isRoomMaster && !isVisibility) {
+            if (this._mainPlayer && this._mainPlayer.isRoomMaster && !isVisibility) {
                 this._game.network.call_set_app_state(Web_operation_fields.APP_STATE_TYPE_MINIMIZE);
             }
             if (isVisibility) {

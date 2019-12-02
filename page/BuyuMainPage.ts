@@ -63,6 +63,7 @@ module gamebuyu.page {
         // 页面打开时执行函数
         protected onOpen(): void {
             super.onOpen();
+
             (this._viewUI.view_hud as TongyongHudNqpPage).onOpen(this._game, BuyuPageDef.GAME_NAME);
             //按钮监听
             this._viewUI.img_room0.on(LEvent.CLICK, this, this.onBtnClickWithTween);
@@ -112,9 +113,29 @@ module gamebuyu.page {
                 case this._viewUI.btn_join:
                     let maplv = TongyongUtil.getJoinMapLv(BuyuPageDef.GAME_NAME, mainPlayer.playerInfo.money);
                     if (!maplv) return;
+                    //后两个场次需要vip1才可以进去(非api条件下)
+                    if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
+                        if (!this.checkVipLevel()) return;
+                    }
                     this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, maplv.toString(), true);
                     break;
             }
+        }
+
+        /**
+         * 检查进入房间的vip等级，至少vip1
+         */
+        private checkVipLevel(): boolean {
+            let mainPlayer = this._game.sceneObjectMgr.mainPlayer;
+            if (!mainPlayer) return false;
+            if (mainPlayer.playerInfo.vip_level < 1) {
+                TongyongPageDef.ins.alertRecharge(StringU.substitute("老板，进入该场次需要 VIP 1 哦，充点小钱即可达到"), () => {
+                    this._game.uiRoot.general.open(DatingPageDef.PAGE_CHONGZHI);
+                }, () => {
+                }, true, TongyongPageDef.TIPS_SKIN_STR['cz'], TongyongPageDef.TIPS_SKIN_STR["title_ts"]);
+                return false;
+            }
+            return true;
         }
 
         /**
@@ -130,6 +151,9 @@ module gamebuyu.page {
                 let str = StringU.substitute("老板，您的金币少于{0}哦~\n补充点金币去大杀四方吧~", roomInfo.minGold);
                 this.gotoRecharge(str);
             } else {
+                if (mode >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
+                    if (!this.checkVipLevel()) return;
+                }
                 //进入
                 this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, mode.toString(), true);
             }
@@ -151,7 +175,7 @@ module gamebuyu.page {
                 if (ccb) {
                     ccb();
                 }
-            }, true);
+            }, true,Tips.TIPS_SKIN_STR["cz"]);
         }
 
         public close(): void {
