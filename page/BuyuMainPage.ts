@@ -110,15 +110,15 @@ module gamebuyu.page {
                 case this._viewUI.img_room3://1元场
                     this.checkMoneyToStory(Web_operation_fields.GAME_ROOM_CONFIG_FISH_4);
                     break;
-                case this._viewUI.btn_join:
-                    let maplv = TongyongUtil.getJoinMapLv(BuyuPageDef.GAME_NAME, mainPlayer.playerInfo.money);
-                    if (!maplv) return;
-                    //后两个场次需要vip1才可以进去(非api条件下)
-                    if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
-                        if (!this.checkVipLevel()) return;
-                    }
-                    this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, maplv.toString(), true);
-                    break;
+                // case this._viewUI.btn_join:
+                //     let maplv = TongyongUtil.getJoinMapLv(BuyuPageDef.GAME_NAME, mainPlayer.playerInfo.money);
+                //     if (!maplv) return;
+                //     //后两个场次需要vip1才可以进去(非api条件下)
+                //     if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
+                //         if (!this.checkVipLevel()) return;
+                //     }
+                //     this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, maplv.toString(), true);
+                //     break;
             }
         }
 
@@ -175,7 +175,7 @@ module gamebuyu.page {
                 if (ccb) {
                     ccb();
                 }
-            }, true,Tips.TIPS_SKIN_STR["cz"]);
+            }, true, Tips.TIPS_SKIN_STR["cz"]);
         }
 
         public close(): void {
