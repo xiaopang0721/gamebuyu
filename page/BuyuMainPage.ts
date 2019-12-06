@@ -64,7 +64,7 @@ module gamebuyu.page {
         protected onOpen(): void {
             super.onOpen();
 
-            (this._viewUI.view_hud as TongyongHudNqpPage).onOpen(this._game, BuyuPageDef.GAME_NAME);
+            (this._viewUI.view_hud as TongyongHudPage).onOpen(this._game, BuyuPageDef.GAME_NAME);
             //按钮监听
             this._viewUI.img_room0.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.img_room1.on(LEvent.CLICK, this, this.onBtnClickWithTween);
