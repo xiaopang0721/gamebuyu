@@ -3,12 +3,9 @@
 */
 module gamebuyu.page {
     export class BuyuMainPage extends game.gui.base.Page {
-        private _viewUI: ui.nqp.game_ui.buyu.BuYu_HUDUI;
-        private _difenTmep: any = [0.01, 0.1, 1];
-        private _leastTmep: any = [1, 10, 100];
-        private _clipArr: any[] = [ClipUtil.HUD_FONT1, ClipUtil.HUD_FONT2, ClipUtil.HUD_FONT3];
-        private _difenClipList: ClipUtil[] = [];
-        private _leastClipList: ClipUtil[] = [];
+        private _viewUI: ui.ajqp.game_ui.buyu.BuYu_HUDUI;
+        private _difenTmep: any = [0, 0.01, 0.1, 1];
+        private _leastTmep: any = [0, 1, 10, 100];
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
@@ -21,10 +18,8 @@ module gamebuyu.page {
                 Path_game_buyu.atlas_game_ui + "buyu/hud.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
-                Path_game_buyu.ui_buyu + "sk/buyu_0.png",
-                Path_game_buyu.ui_buyu + "sk/buyu_1.png",
-                Path_game_buyu.ui_buyu + "sk/buyu_2.png",
-                Path_game_buyu.ui_buyu + "sk/buyu_3.png",
+                PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
                 Path.temp + "template.bin",
                 Path.temp + "fish_group.json",
             ];
@@ -41,23 +36,6 @@ module gamebuyu.page {
             }
 
             BuyuPageDef.parseBuYuData(this._assetsLoader);
-            for (let index = 0; index < 3; index++) {
-                if (!this._difenClipList[index]) {
-                    this._difenClipList[index] = new ClipUtil(this._clipArr[index]);
-                    this._difenClipList[index].x = this._viewUI["txt_difen" + index].x;
-                    this._difenClipList[index].y = this._viewUI["txt_difen" + index].y;
-                    this._viewUI["txt_difen" + index].parent && this._viewUI["txt_difen" + index].parent.addChild(this._difenClipList[index]);
-                    this._viewUI["txt_difen" + index].removeSelf();
-                }
-                if (!this._leastClipList[index]) {
-                    this._leastClipList[index] = new ClipUtil(this._clipArr[index]);
-                    this._leastClipList[index].x = this._viewUI["txt_least" + index].x;
-                    this._leastClipList[index].y = this._viewUI["txt_least" + index].y;
-                    this._leastClipList[index].scale(0.8, 0.8);
-                    this._viewUI["txt_least" + index].parent && this._viewUI["txt_least" + index].parent.addChild(this._leastClipList[index]);
-                    this._viewUI["txt_least" + index].removeSelf();
-                }
-            }
         }
 
         // 页面打开时执行函数
@@ -70,20 +48,19 @@ module gamebuyu.page {
             this._viewUI.img_room1.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.img_room2.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.img_room3.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.btn_join.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 
             for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
                 this._viewUI.box_right._childs[index].visible = true;
                 Laya.Tween.from(this._viewUI.box_right._childs[index], {
-                    right: -300
+                    x: 1280
                 }, 200 + index * 100, Laya.Ease.linearNone);
             }
             //房间条件
-            for (let index = 0; index < this._difenClipList.length; index++) {
-                this._difenClipList[index].setText(this._difenTmep[index], true, false);
+            for (let index = 1; index < this._difenTmep.length; index++) {
+                this._viewUI["txt_difen" + index].text = "底分：" + this._difenTmep[index];
             }
-            for (let index = 0; index < this._leastClipList.length; index++) {
-                this._leastClipList[index].setText(this._leastTmep[index], true, false);
+            for (let index = 1; index < this._leastTmep.length; index++) {
+                this._viewUI["txt_least" + index].text = "准入：" + this._leastTmep[index];
             }
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }
@@ -110,15 +87,6 @@ module gamebuyu.page {
                 case this._viewUI.img_room3://1元场
                     this.checkMoneyToStory(Web_operation_fields.GAME_ROOM_CONFIG_FISH_4);
                     break;
-                // case this._viewUI.btn_join:
-                //     let maplv = TongyongUtil.getJoinMapLv(BuyuPageDef.GAME_NAME, mainPlayer.playerInfo.money);
-                //     if (!maplv) return;
-                //     //后两个场次需要vip1才可以进去(非api条件下)
-                //     if (maplv >= Web_operation_fields.GAME_ROOM_CONFIG_FISH_3 && !WebConfig.enterGameLocked) {
-                //         if (!this.checkVipLevel()) return;
-                //     }
-                //     this._game.sceneObjectMgr.intoStory(BuyuPageDef.GAME_NAME, maplv.toString(), true);
-                //     break;
             }
         }
 
@@ -184,7 +152,6 @@ module gamebuyu.page {
                 this._viewUI.img_room1.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.img_room2.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.img_room3.off(LEvent.CLICK, this, this.onBtnClickWithTween);
-                this._viewUI.btn_join.off(LEvent.CLICK, this, this.onBtnClickWithTween);
             }
             super.close();
         }

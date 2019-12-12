@@ -6,7 +6,7 @@ module gamebuyu.page {
         static NUM_SHOW_TIME: number = 1000;//数字空转多久
         static NUM_STOP_INTERVAL: number = 500;//数字停留间隔
 
-        private _viewUI: ui.nqp.game_ui.buyu.BuYu_GreatUI;
+        private _viewUI: ui.ajqp.game_ui.buyu.BuYu_GreatUI;
         private _clipArr: NumClip[] = [];
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);

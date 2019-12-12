@@ -17,7 +17,7 @@ module gamebuyu.page {
         static AWARD_SHOW_TIME: number = 5;
 
         //炮台视图对象
-        private _viewUI: ui.nqp.game_ui.buyu.component.BuYu_GunItemUI;
+        private _viewUI: ui.ajqp.game_ui.buyu.component.BuYu_GunItemUI;
         get viewUI() {
             return this._viewUI;
         }
@@ -67,7 +67,7 @@ module gamebuyu.page {
             this._showPos = showPos;
             this._game = game;
             //视图对象
-            this._viewUI = new ui.nqp.game_ui.buyu.component.BuYu_GunItemUI();
+            this._viewUI = new ui.ajqp.game_ui.buyu.component.BuYu_GunItemUI();
             this.addChild(this._viewUI);
             this.size(this._viewUI.width, this._viewUI.height);
             //初始化UI

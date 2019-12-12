@@ -7,7 +7,7 @@ module gamebuyu.page {
         //体验场提示间隔
         static TIPS_INTERVAL: number = 3 * 60 * 1000;
 
-        private _viewUI: ui.nqp.game_ui.buyu.BuYu_SceneHUDUI;
+        private _viewUI: ui.ajqp.game_ui.buyu.BuYu_SceneHUDUI;
         //主玩家
         private _mainPlayer: BuyuPlayer;
         //4个炮的对象集合
@@ -31,13 +31,15 @@ module gamebuyu.page {
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
             this._asset = [
+                DatingPath.atlas_dating_ui + "qifu.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
-                DatingPath.atlas_dating_ui + "qifu.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/pao.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
                 Path.custom_atlas_scene + 'bullet.atlas',
                 Path.custom_atlas_scene + 'single.atlas',
                 Path.custom_atlas_scene + 'lightning.atlas',
@@ -56,8 +58,6 @@ module gamebuyu.page {
             this._targetV = new Vector2();
             BuyuPageDef.parseBuYuData(this._assetsLoader);
             this._ignoreButtonUI = [this._viewUI.btn_spread, this._viewUI.btn_qifu, this._viewUI.btn_Exit, this._viewUI.btn_Rule, this._viewUI.btn_Set, this._viewUI.btn_zhanji, this._viewUI.check_Aim, this._viewUI.check_Auto];
-            this._viewUI.btn_spread.left = this._game.isFullScreen ? 30 : 10;
-            this._viewUI.box_menu.left = this._game.isFullScreen ? 25 : 10;
         }
 
         // 页面打开时执行函数
@@ -86,7 +86,6 @@ module gamebuyu.page {
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
-            this._viewUI.box_Left.anchorX = 0;
             this._viewUI.box_Right.anchorX = 1;
             this._viewUI.btn_Exit.anchorX = 1;
             this._viewUI.box_menu.visible = false;
@@ -105,8 +104,8 @@ module gamebuyu.page {
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }
 
-        private _isVisibility:boolean;
-        private checkStageVisiable(isVisibility:boolean) {
+        private _isVisibility: boolean;
+        private checkStageVisiable(isVisibility: boolean) {
             if (this._isVisibility == isVisibility) {
                 return;
             }
@@ -126,25 +125,21 @@ module gamebuyu.page {
 
         protected onMouseClick(e: LEvent) {
             if (e.target != this._viewUI.btn_spread) {
-                this.showMenu(false);
+                this.menuTween(false);
             }
         }
 
-        showMenu(isShow: boolean) {
-
-            this._isMenuShow = isShow;
-            if (isShow) {
+        //菜单栏
+        private menuTween(isOpen: boolean) {
+            if (isOpen) {
                 this._viewUI.box_menu.visible = true;
-                this._viewUI.btn_spread.visible = false;
-                this._viewUI.box_menu.y = -this._viewUI.box_menu.height;
-                Laya.Tween.to(this._viewUI.box_menu, { y: 10 }, 300, Laya.Ease.circIn)
+                this._viewUI.box_menu.scale(0.2, 0.2);
+                this._viewUI.box_menu.alpha = 0;
+                Laya.Tween.to(this._viewUI.box_menu, { scaleX: 1, scaleY: 1, alpha: 1 }, 300, Laya.Ease.backInOut);
             } else {
-                if (this._viewUI.box_menu.y >= 0) {
-                    Laya.Tween.to(this._viewUI.box_menu, { y: -this._viewUI.box_menu.height }, 300, Laya.Ease.circIn, Handler.create(this, () => {
-                        this._viewUI.btn_spread.visible = true;
-                        this._viewUI.box_menu.visible = false;
-                    }));
-                }
+                Laya.Tween.to(this._viewUI.box_menu, { scaleX: 0.2, scaleY: 0.2, alpha: 0 }, 300, Laya.Ease.backInOut, Handler.create(this, () => {
+                    this._viewUI.box_menu.visible = false;
+                }));
             }
         }
 
@@ -170,7 +165,7 @@ module gamebuyu.page {
             this._game.qifuMgr.showFlayAni(mainView.viewUI.label_Name, this._viewUI, dataSource, null);
         }
 
-        update(diff: number): void {            
+        update(diff: number): void {
             if (!this._viewUI) return;
             this.checkStageVisiable(Laya.stage.isVisibility);
             let nowServerTime: number = this._game.sync.serverTimeBys;
@@ -274,7 +269,7 @@ module gamebuyu.page {
             let mainPlayer = this._buyuMgr.mainPlayer;
             switch (target) {
                 case this._viewUI.btn_spread:
-                    this.showMenu(true);
+                    this.menuTween(!this._viewUI.box_menu.visible);
                     break;
                 case this._viewUI.btn_Exit:
                     this._game.sceneObjectMgr.leaveStory(true);

@@ -5,7 +5,7 @@
 module gamebuyu.page {
     export class BuyuBossPage extends game.gui.base.Page {
 
-        private _viewUI: ui.nqp.game_ui.buyu.BuYu_BossUI;
+        private _viewUI: ui.ajqp.game_ui.buyu.BuYu_BossUI;
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);

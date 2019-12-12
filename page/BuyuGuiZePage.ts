@@ -11,7 +11,7 @@ module gamebuyu.page {
         static TYPE_BOSS: number = 3;
         static TYPE_SPECIAL: number = 4;
 
-        private _viewUI: ui.nqp.game_ui.buyu.BuYu_GuiZeUI;
+        private _viewUI: ui.ajqp.game_ui.buyu.BuYu_GuiZeUI;
         private _index: number;
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
@@ -158,7 +158,7 @@ module gamebuyu.page {
         }
     }
 
-    class HelpItem1 extends ui.nqp.game_ui.buyu.component.BangZhuItem1UI {
+    class HelpItem1 extends ui.ajqp.game_ui.buyu.component.BangZhuItem1UI {
         setData(value: any) {
             this.label_Name.text = value.name;
             this.label_Rate.text = "倍数:" + value.rate_range[0];
@@ -166,7 +166,7 @@ module gamebuyu.page {
         }
     }
 
-    class HelpItem2 extends ui.nqp.game_ui.buyu.component.BangZhuItem2UI {
+    class HelpItem2 extends ui.ajqp.game_ui.buyu.component.BangZhuItem2UI {
         setData(value: any) {
             this.label_Name.text = value.name;
             this.label_Rate.text = "倍数:" + value.rate_range[0] + "~" + value.rate_range[1];
