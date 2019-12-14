@@ -57,10 +57,10 @@ module gamebuyu.page {
             }
             //房间条件
             for (let index = 1; index < this._difenTmep.length; index++) {
-                this._viewUI["txt_difen" + index].text = "底分：" + this._difenTmep[index];
+                this._viewUI["txt_difen" + index].text = "" + this._difenTmep[index];
             }
             for (let index = 1; index < this._leastTmep.length; index++) {
-                this._viewUI["txt_least" + index].text = "准入：" + this._leastTmep[index];
+                this._viewUI["txt_least" + index].text = "" + this._leastTmep[index];
             }
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }

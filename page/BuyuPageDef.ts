@@ -49,11 +49,6 @@ module gamebuyu.page {
 
 			this["__needLoadAsset"] = [
 				DatingPath.atlas_dating_ui + "qifu.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				Path_game_buyu.atlas_game_ui + "buyu/hud.atlas",
 				Path_game_buyu.atlas_game_ui + 'buyu/bosslaixi.atlas',
 				Path_game_buyu.atlas_game_ui + 'buyu/guize.atlas',
@@ -61,6 +56,11 @@ module gamebuyu.page {
 				Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
 				Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
 				Path_game_buyu.atlas_game_ui + "buyu/pao.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
 				Path.ui_atlas_effect + "coin.atlas",
@@ -82,11 +82,6 @@ module gamebuyu.page {
 				Path.custom_atlas_scene + "single.atlas",
 				Path.custom_atlas_scene + "lightning.atlas",
 				Path.custom_atlas_scene + "bullet.atlas",
-
-				Path_game_buyu.ui_buyu + "sk/buyu_0.png",
-				Path_game_buyu.ui_buyu + "sk/buyu_1.png",
-				Path_game_buyu.ui_buyu + "sk/buyu_2.png",
-				Path_game_buyu.ui_buyu + "sk/buyu_3.png",
 			]
 
 			if (WebConfig.needMusicPreload) {
