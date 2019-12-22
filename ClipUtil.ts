@@ -13,12 +13,8 @@ module gamebuyu {
         public static SUB_MONEY_FONT: any;
         //捕鱼转盘字体
         public static ZHUANPAN_FONT: any;
-        //HUD数字1
-        public static HUD_FONT1: any;
-        //HUD数字2
-        public static HUD_FONT2: any;
-        //HUD数字3
-        public static HUD_FONT3: any;
+        //底分准入通用白字
+        public static WHITE_FONT: any;
 
         static init(): void {
             this.MONEY_FONT2 = {
@@ -68,34 +64,14 @@ module gamebuyu {
                 space: 0,
             };
 
-            //HUD数字1
-            this.HUD_FONT1 = {
+            //底分准入通用白字
+            this.WHITE_FONT = {
                 source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
-                url: Path_game_buyu.ui_buyu + 'hud/clip_1.png',
-                clipWidth: 22,
-                clipHeight: 25,
+                url: PathGameTongyong.ui_tongyong_hud + 'clip_sz.png',
+                clipWidth: 17,
+                clipHeight: 23,
                 clipX: 11,
-                space: -5
-            };
-
-            //HUD数字2
-            this.HUD_FONT2 = {
-                source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
-                url: Path_game_buyu.ui_buyu + 'hud/clip_2.png',
-                clipWidth: 22,
-                clipHeight: 25,
-                clipX: 11,
-                space: -5
-            };
-
-            //HUD数字3
-            this.HUD_FONT3 = {
-                source: PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
-                url: Path_game_buyu.ui_buyu + 'hud/clip_3.png',
-                clipWidth: 22,
-                clipHeight: 25,
-                clipX: 11,
-                space: -5
+                space: -4
             };
         }
         private _clip: ClipCell;
@@ -274,7 +250,7 @@ module gamebuyu {
                 for (let i = 0; i < len; i++) {
                     let clip = this._clipArray[i];
                     let indexStr: string = this._txtStr.charAt(i).toString();
-                    let index = (indexStr == ".") ? 10 : parseInt(indexStr);
+                    let index = (indexStr == "-") ? 11 : (indexStr == ".") ? 10 : parseInt(indexStr);
                     if (!clip) {
                         clip = this.createClip(index);
                         this._container.addChild(clip);

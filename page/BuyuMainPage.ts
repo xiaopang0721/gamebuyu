@@ -4,8 +4,8 @@
 module gamebuyu.page {
     export class BuyuMainPage extends game.gui.base.Page {
         private _viewUI: ui.ajqp.game_ui.buyu.BuYu_HUDUI;
-        private _difenTmep: any = [0, 0.01, 0.1, 1];
-        private _leastTmep: any = [0, 1, 10, 100];
+        private _difenTmep: any = [0.01, 0.1, 1];
+        private _leastTmep: any = [1, 10, 100];
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
@@ -34,7 +34,6 @@ module gamebuyu.page {
             for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
                 this._viewUI.box_right._childs[index].visible = false;
             }
-
             BuyuPageDef.parseBuYuData(this._assetsLoader);
         }
 
@@ -56,11 +55,11 @@ module gamebuyu.page {
                 }, 200 + index * 100, Laya.Ease.linearNone);
             }
             //房间条件
-            for (let index = 1; index < this._difenTmep.length; index++) {
-                this._viewUI["txt_difen" + index].text = "" + this._difenTmep[index];
+            for (let index = 0; index < this._difenTmep.length; index++) {
+                this._viewUI["txt_difen" + (index + 1)].text = this._difenTmep[index] + "";
             }
-            for (let index = 1; index < this._leastTmep.length; index++) {
-                this._viewUI["txt_least" + index].text = "" + this._leastTmep[index];
+            for (let index = 0; index < this._leastTmep.length; index++) {
+                this._viewUI["txt_least" + (index + 1)].text = this._leastTmep[index] + "";
             }
             this._game.playMusic(Path.music + "buyu/bg.mp3");
         }
