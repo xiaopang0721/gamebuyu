@@ -86,8 +86,6 @@ module gamebuyu.page {
             this._game.sceneObjectMgr.on(BuyuMapInfo.EVENT_BOSS_EVENT, this, this.onBossEvent);
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
-            this._viewUI.box_Right.anchorX = 1;
-            this._viewUI.btn_Exit.anchorX = 1;
             this._viewUI.box_menu.visible = false;
             this._viewUI.image_Mz.visible = false;
             this._viewUI.image_Mz.anchorX = this._viewUI.image_Mz.anchorY = 0.5;
