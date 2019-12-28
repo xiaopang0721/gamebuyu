@@ -43,16 +43,18 @@ module gamebuyu.page {
 
             (this._viewUI.view_hud as TongyongHudPage).onOpen(this._game, BuyuPageDef.GAME_NAME);
             //按钮监听
-            this._viewUI.img_room0.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.img_room1.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.img_room2.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.img_room3.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            // this._viewUI.img_room0.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            // this._viewUI.img_room1.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            // this._viewUI.img_room2.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            // this._viewUI.img_room3.on(LEvent.CLICK, this, this.onBtnClickWithTween);
 
             for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
                 this._viewUI.box_right._childs[index].visible = true;
                 Laya.Tween.from(this._viewUI.box_right._childs[index], {
                     x: 1280
-                }, 200 + index * 100, Laya.Ease.linearNone);
+                }, 200 + index * 100, Laya.Ease.linearNone, Handler.create(this, () => {
+                    this._viewUI.box_right._childs[index].on(LEvent.CLICK, this, this.onBtnClickWithTween);
+                }));
             }
             //房间条件
             for (let index = 0; index < this._difenTmep.length; index++) {
