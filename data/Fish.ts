@@ -255,7 +255,7 @@ module gamebuyu.data {
 
         private updateLoot(): void {
             // 校验战利品
-            this.lootMoney = this._unit.GetLootMoney();
+            this.lootMoney = TongyongUtil.getMoneyChange(this._unit.GetLootMoney());
             this.checkFishDie();
         }
 

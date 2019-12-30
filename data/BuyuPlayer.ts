@@ -293,7 +293,7 @@ module gamebuyu.data {
 
         private updateGold(): void {
             if (!this._unit) return;
-            this._gold = this._unit.GetMoney();
+            this._gold = TongyongUtil.getMoneyChange(this._unit.GetMoney());
             this.checkBroke();
             this.event(BuyuPlayer.GOLD_CHANGED);
         }
