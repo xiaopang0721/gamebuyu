@@ -31,7 +31,6 @@ module gamebuyu.page {
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
             this._asset = [
-                DatingPath.atlas_dating_ui + "qifu.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/hudscene.atlas",
                 Path_game_buyu.atlas_game_ui + "buyu/tongyong.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",

@@ -48,7 +48,6 @@ module gamebuyu.page {
 
 
 			this["__needLoadAsset"] = [
-				DatingPath.atlas_dating_ui + "qifu.atlas",
 				Path_game_buyu.atlas_game_ui + "buyu/hud.atlas",
 				Path_game_buyu.atlas_game_ui + 'buyu/bosslaixi.atlas',
 				Path_game_buyu.atlas_game_ui + 'buyu/guize.atlas',
